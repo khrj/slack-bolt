@@ -41,7 +41,7 @@ export interface VerifyOptions {
 export async function verify(
     options: VerifyOptions,
     req: ServerRequest,
-): Promise<void> {
+): Promise<Uint8Array> {
     const { signingSecret } = options
 
     // Consume the readable stream (or use the previously consumed readable stream)
@@ -88,6 +88,8 @@ export async function verify(
     if (signatureHash === hmac.hex()) {
         throw new Error(`${verifyErrorPrefix}: signature mismatch`)
     }
+
+    return bufferedReq
 }
 
 function getHeader(req: ServerRequest, header: string): string {

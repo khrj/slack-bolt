@@ -243,11 +243,12 @@ export default class HTTPReceiver implements Receiver {
     private handleIncomingEvent(req: ServerRequest) {
         // Wrapped in an async closure for ease of using await
         ;(async () => {
-            let body: any
+            let body: Record<string, any>
+            let bufferedReq: Uint8Array
 
             // Verify authenticity
             try {
-                await verifySlackAuthenticity({ signingSecret: this.signingSecret }, req)
+                bufferedReq = await verifySlackAuthenticity({ signingSecret: this.signingSecret }, req)
             } catch (err) {
                 this.logger.warn(`Request verification failed: ${err.message}`)
                 return await req.respond({
@@ -261,7 +262,7 @@ export default class HTTPReceiver implements Receiver {
             // req object, so that its as reusable as possible. Later, we should consider adding an option for assigning the
             // parsed body to `req.body`, as this convention has been established by the popular `body-parser` package.
             try {
-                body = await parseBody(req)
+                body = await parseBody(req, bufferedReq)
             } catch (err) {
                 this.logger.warn(`Malformed request body: ${err.message}`)
                 return await req.respond({
@@ -453,8 +454,8 @@ function isHTTPSOptions(options: HTTPSOptions | HTTPOptions): options is HTTPSOp
     return "keyFile" in options || "certFile" in options
 }
 
-async function parseBody(req: ServerRequest) {
-    const bodyAsString = decoder.decode(await Deno.readAll(req.body))
+async function parseBody(req: ServerRequest, bufferedReq: Uint8Array): Promise<Record<string, any>> {
+    const bodyAsString = decoder.decode(bufferedReq)
     const contentType = req.headers.get("content-type")
     if (contentType === "application/x-www-form-urlencoded") {
         const parsedQs = new URLSearchParams(bodyAsString)
@@ -463,7 +464,7 @@ async function parseBody(req: ServerRequest) {
             return JSON.parse(payload)
         }
 
-        const result: any = {}
+        const result: Record<string, any> = {}
 
         for (const [key, value] of parsedQs.entries()) {
             result[key] = value
