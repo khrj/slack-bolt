@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any camelcase
 import { Option } from "../../../deps.ts"
 import { StringIndexed, XOR } from "../helpers.ts"
 import { AckFn } from "../utilities.ts"

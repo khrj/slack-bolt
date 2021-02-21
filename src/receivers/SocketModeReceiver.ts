@@ -127,26 +127,23 @@ export default class SocketModeReceiver implements Receiver {
             this.logger.debug(
                 `Go to http://localhost:${port}${installPath} to initiate OAuth flow`,
             )
-
-            const socketModeReciever = this
-
-            async function handleOauth() {
+            ;(async () => {
                 const server = serve({ port: 8080 })
 
                 for await (const req of server) {
                     if (req.url !== undefined && req.url.startsWith(redirectUriPath)) {
                         const reqURL = new URL(req.url)
                         try {
-                            const result = await socketModeReciever.installer!.handle(
+                            const result = await this.installer!.handle(
                                 reqURL.searchParams.get("code")!,
                                 reqURL.searchParams.get("state")!,
                             )
 
                             if (
-                                socketModeReciever.installerRedirectOptions
-                                && socketModeReciever.installerRedirectOptions.success
+                                this.installerRedirectOptions
+                                && this.installerRedirectOptions.success
                             ) {
-                                await socketModeReciever.installerRedirectOptions.success(req)
+                                await this.installerRedirectOptions.success(req)
                             } else {
                                 await req.respond({
                                     status: 200,
@@ -155,10 +152,10 @@ export default class SocketModeReceiver implements Receiver {
                             }
                         } catch (e) {
                             if (
-                                socketModeReciever.installerRedirectOptions
-                                && socketModeReciever.installerRedirectOptions.failure
+                                this.installerRedirectOptions
+                                && this.installerRedirectOptions.failure
                             ) {
-                                await socketModeReciever.installerRedirectOptions.failure(req)
+                                await this.installerRedirectOptions.failure(req)
                             } else {
                                 await req.respond({
                                     status: 500,
@@ -168,7 +165,7 @@ export default class SocketModeReceiver implements Receiver {
                         }
                     } else if (req.url !== undefined && req.url.startsWith(installPath)) {
                         try {
-                            const url = await socketModeReciever.installer!.generateInstallUrl({
+                            const url = await this.installer!.generateInstallUrl({
                                 metadata: installerOptions.metadata,
                                 scopes: scopes!,
                                 userScopes: installerOptions.userScopes,
@@ -185,7 +182,8 @@ export default class SocketModeReceiver implements Receiver {
                             throw new Error(err)
                         }
                     } else {
-                        socketModeReciever.logger.error(`Tried to reach ${req.url} which isn't a`)
+                        // @ts-ignore Accessed from inside of IIFE, TS limitation
+                        this.logger.error(`Tried to reach ${req.url} which isn't a`)
                         // Return 404 because we don't support route
                         await req.respond({
                             status: 404,
@@ -193,9 +191,7 @@ export default class SocketModeReceiver implements Receiver {
                         })
                     }
                 }
-            }
-
-            handleOauth()
+            })()
         }
 
         this.client.addEventListener("slack_event", async ({ detail: { ack, body } }) => {

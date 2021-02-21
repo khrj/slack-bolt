@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import { getTypeAndConversation } from "./helpers.ts"
 import { AnyMiddlewareArgs, Middleware } from "./types/index.ts"
 

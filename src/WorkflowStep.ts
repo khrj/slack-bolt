@@ -1,14 +1,15 @@
+// deno-lint-ignore-file camelcase no-explicit-any
 import { Block, KnownBlock, WebAPICallResult } from "../deps.ts"
 import { WorkflowStepInitializationError } from "./errors.ts"
 import { processMiddleware } from "./middleware/process.ts"
 import {
     AllMiddlewareArgs,
     AnyMiddlewareArgs,
-    Context,
     Middleware,
     SlackActionMiddlewareArgs,
     SlackEventMiddlewareArgs,
     SlackViewMiddlewareArgs,
+    StringIndexed,
     ViewWorkflowStepSubmitAction,
     WorkflowStepEdit,
     WorkflowStepExecuteEvent,
@@ -155,7 +156,7 @@ export class WorkflowStep {
     }
 
     public getMiddleware(): Middleware<AnyMiddlewareArgs> {
-        return async (args): Promise<any> => {
+        return (args): Promise<any> => {
             if (isStepEvent(args) && this.matchesConstraints(args)) {
                 return this.processEvent(args)
             }
@@ -167,7 +168,7 @@ export class WorkflowStep {
         return args.payload.callback_id === this.callbackId
     }
 
-    private async processEvent(
+    private processEvent(
         args: AllWorkflowStepMiddlewareArgs,
     ): Promise<void> {
         const { payload } = args
@@ -251,7 +252,7 @@ export async function processStepMiddleware(
             context,
             client,
             logger,
-            async () => lastCallback({ ...args, context, client, logger }),
+            () => lastCallback({ ...args, context, client, logger }),
         )
     }
 }
@@ -262,7 +263,7 @@ export function isStepEvent(
     return VALID_PAYLOAD_TYPES.has(args.payload.type)
 }
 
-function selectToken(context: Context): string | undefined {
+function selectToken(context: StringIndexed): string | undefined {
     return context.botToken !== undefined ? context.botToken : context.userToken
 }
 

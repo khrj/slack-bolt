@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase no-explicit-any
 import { View } from "../../../deps.ts"
 import { MessageEvent as AllMessageEvents } from "./message-events.ts"
 
@@ -498,7 +499,7 @@ export interface PinAddedEvent {
     user: string
     channel_id: string
     // TODO: incomplete, should be message | file | file comment (deprecated)
-    item: {}
+    item: Record<string, any>
 }
 
 export interface PinRemovedEvent {
@@ -506,7 +507,7 @@ export interface PinRemovedEvent {
     user: string
     channel_id: string
     // TODO: incomplete, should be message | file | file comment (deprecated)
-    item: {}
+    item: Record<string, any>
     has_pins: boolean
     event_ts: string
 }
@@ -546,7 +547,7 @@ export interface ReactionRemovedEvent {
     item_user: string
     // TODO: incomplete, should be message | file | file comment (deprecated)
     // https://api.slack.com/events/reaction_removed
-    item: {}
+    item: Record<string, any>
     event_ts: string
 }
 
@@ -558,7 +559,7 @@ export interface StarAddedEvent {
     user: string
     // TODO: incomplete, items are of type message | file | file comment (deprecated) | channel | im | group
     // https://api.slack.com/events/star_added, https://api.slack.com/methods/stars.list
-    item: {}
+    item: Record<string, any>
     event_ts: string
 }
 
@@ -567,7 +568,7 @@ export interface StarRemovedEvent {
     user: string
     // TODO: incomplete, items are of type message | file | file comment (deprecated) | channel | im | group
     // https://api.slack.com/events/star_removed, https://api.slack.com/methods/stars.list
-    item: {}
+    item: Record<string, any>
     event_ts: string
 }
 

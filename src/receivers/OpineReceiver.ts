@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import {
     ConsoleLogger,
     createHmac,
@@ -218,7 +219,7 @@ export default class OpineReceiver implements Receiver {
         let storedResponse
         const event: ReceiverEvent = {
             body: JSON.parse(decoder.decode(await Deno.readAll(req.raw))),
-            ack: async (response): Promise<void> => {
+            ack: (response): Promise<void> => {
                 this.logger.debug("ack() begin")
                 if (isAcknowledged) {
                     throw new ReceiverMultipleAckError()
@@ -241,6 +242,8 @@ export default class OpineReceiver implements Receiver {
                     }
                     this.logger.debug("ack() response sent")
                 }
+
+                return Promise.resolve()
             },
         }
 
@@ -312,7 +315,7 @@ export function verifySignatureAndParseRawBody(
     logger: Logger,
     signingSecret: string,
 ): RequestHandler {
-    return async (req, res, next) => {
+    return (req, res, next) => {
         // TODO (?)
         // On some environments like GCP (Google Cloud Platform),
         // req.body can be pre-parsed and be passed as req.rawBody here

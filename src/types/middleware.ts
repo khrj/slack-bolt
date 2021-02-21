@@ -17,7 +17,7 @@ export type AnyMiddlewareArgs =
     | SlackShortcutMiddlewareArgs
 
 export interface AllMiddlewareArgs {
-    context: Context
+    context: StringIndexed
     logger: Logger
     client: WebClient
     // TODO: figure out how to make next non-optional
@@ -30,6 +30,5 @@ export interface Middleware<Args> {
     (args: Args & AllMiddlewareArgs): Promise<void>
 }
 
-export interface Context extends StringIndexed {}
-
 export type NextFn = () => Promise<void>
+export type { StringIndexed } from "./helpers.ts"

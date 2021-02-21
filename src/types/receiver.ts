@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import App from "../App.ts"
 import { StringIndexed } from "./helpers.ts"
 import { AckFn } from "./index.ts"

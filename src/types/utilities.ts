@@ -1,3 +1,5 @@
+// deno-lint-ignore-file no-explicit-any
+
 import { ChatPostMessageArguments, WebAPICallResult } from "../../deps.ts"
 import { KnownKeys } from "./helpers.ts"
 

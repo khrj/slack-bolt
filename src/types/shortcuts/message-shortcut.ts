@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase no-explicit-any
 /**
  * A Slack message action wrapped in the standard metadata.
  *

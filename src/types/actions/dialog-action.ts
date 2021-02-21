@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase
 /**
  * A Slack dialog submit action wrapped in the standard metadata.
  *

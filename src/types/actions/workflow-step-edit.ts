@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase no-explicit-any
 /**
  * A Slack workflow step action wrapped in the standard metadata.
  *

@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase
 /**
  * All actions which Slack delivers from legacy interactive messages. The full body of these actions are represented
  * as [[InteractiveMessage]].

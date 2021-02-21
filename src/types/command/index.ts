@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase
 import { StringIndexed } from "../helpers.ts"
 import { AckFn, RespondArguments, RespondFn, SayFn } from "../utilities.ts"
 

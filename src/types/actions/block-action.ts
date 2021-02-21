@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase no-explicit-any
 import { Confirmation, Option, PlainTextElement } from "../../../deps.ts"
 import { StringIndexed } from "../helpers.ts"
 import { ViewOutput } from "../view/index.ts"

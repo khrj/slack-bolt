@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase
 export * from "./base-events.ts"
 export type { BotMessageEvent, GenericMessageEvent } from "./message-events.ts"
 import { StringIndexed } from "../helpers.ts"

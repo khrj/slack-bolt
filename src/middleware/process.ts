@@ -1,17 +1,17 @@
 import { Logger, WebClient } from "../../deps.ts"
-import { AnyMiddlewareArgs, Context, Middleware } from "../types/index.ts"
+import { AnyMiddlewareArgs, Middleware, StringIndexed } from "../types/index.ts"
 
-export async function processMiddleware(
+export function processMiddleware(
     middleware: Middleware<AnyMiddlewareArgs>[],
     initialArgs: AnyMiddlewareArgs,
-    context: Context,
+    context: StringIndexed,
     client: WebClient,
     logger: Logger,
     last: () => Promise<void>,
 ): Promise<void> {
     let lastCalledMiddlewareIndex = -1
 
-    async function invokeMiddleware(
+    function invokeMiddleware(
         toCallMiddlewareIndex: number,
     ): ReturnType<Middleware<AnyMiddlewareArgs>> {
         if (lastCalledMiddlewareIndex >= toCallMiddlewareIndex) {

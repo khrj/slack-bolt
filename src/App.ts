@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase no-explicit-any
 import { name, version } from "../config.ts"
 import {
     addAppMetadata,
@@ -36,7 +37,6 @@ import {
     AckFn,
     AnyMiddlewareArgs,
     BlockAction,
-    Context,
     EventTypePattern,
     InteractiveMessage,
     Middleware,
@@ -55,6 +55,7 @@ import {
     SlackShortcutMiddlewareArgs,
     SlackViewAction,
     SlackViewMiddlewareArgs,
+    StringIndexed,
 } from "./types/index.ts"
 import { WorkflowStep } from "./WorkflowStep.ts"
 
@@ -752,7 +753,7 @@ export default class App {
             authorizeResult.enterpriseId = source.enterpriseId
         }
 
-        const context: Context = { ...authorizeResult }
+        const context: StringIndexed = { ...authorizeResult }
 
         // Factory for say() utility
         const createSay = (channelId: string): SayFn => {
@@ -897,7 +898,7 @@ export default class App {
                     // Dispatch the event through the listener middleware chains and aggregate their results
                     // TODO: change the name of this.middleware and this.listeners to help this make more sense
                     const listenerResults = this.listeners.map(
-                        async (origListenerMiddleware) => {
+                        (origListenerMiddleware) => {
                             // Copy the array so modifications don't affect the original
                             const listenerMiddleware = [...origListenerMiddleware]
 
@@ -911,14 +912,14 @@ export default class App {
                                     context,
                                     client,
                                     this.logger,
-                                    async () =>
+                                    () =>
                                         // When the listener middleware chain is done processing, call the listener without a next fn
-                                        listener({
+                                        Promise.resolve(listener({
                                             ...(listenerArgs as AnyMiddlewareArgs),
                                             context,
                                             client,
                                             logger: this.logger,
-                                        }),
+                                        })),
                                 )
                             }
                         },
@@ -1195,7 +1196,7 @@ function singleAuthorization(
     }
 }
 
-function selectToken(context: Context): string | undefined {
+function selectToken(context: StringIndexed): string | undefined {
     return context.botToken !== undefined ? context.botToken : context.userToken
 }
 

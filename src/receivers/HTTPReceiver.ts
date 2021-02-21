@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import {
     ConsoleLogger,
     decoder,
@@ -147,6 +148,8 @@ export default class HTTPReceiver implements Receiver {
         this.app = app
     }
 
+    // This function is async to keep the server alive and prevent deno from exiting
+    // deno-lint-ignore require-await
     public async start(options: HTTPOptions | HTTPSOptions): Promise<Server> {
         if (this.server !== undefined) {
             throw new ReceiverInconsistentStateError(
@@ -157,23 +160,20 @@ export default class HTTPReceiver implements Receiver {
         this.server = isHTTPSOptions(options)
             ? serveTLS(options)
             : serve(options)
-
-        const httpReciever = this
-
-        async function handleServerRequests() {
-            for await (const req of httpReciever.server!) {
+        ;(async () => {
+            for await (const req of this.server!) {
                 try {
-                    httpReciever.requestListener(req)
+                    this.requestListener(req)
                 } catch (error) {
                     if (error.code === ErrorCode.HTTPReceiverDeferredRequestError) {
-                        httpReciever.logger.info("An unhandled request was ignored")
+                        this.logger.info("An unhandled request was ignored")
                         req.respond({
                             status: 404,
                             body: "Not Found",
                         })
                     } else {
-                        httpReciever.logger.error("An unexpected error was encountered")
-                        httpReciever.logger.debug(`Error details: ${error}`)
+                        this.logger.error("An unexpected error was encountered")
+                        this.logger.debug(`Error details: ${error}`)
                         req.respond({
                             status: 500,
                             body: "Internal Server Error",
@@ -181,9 +181,8 @@ export default class HTTPReceiver implements Receiver {
                     }
                 }
             }
-        }
+        })()
 
-        handleServerRequests()
         return this.server
     }
 
@@ -241,6 +240,7 @@ export default class HTTPReceiver implements Receiver {
 
     private handleIncomingEvent(req: ServerRequest) {
         // Wrapped in an async closure for ease of using await
+        // deno-lint-ignore no-extra-semi
         ;(async () => {
             let body: Record<string, any>
             let bufferedReq: Uint8Array
@@ -379,6 +379,7 @@ export default class HTTPReceiver implements Receiver {
 
     private handleInstallPathRequest(req: ServerRequest) {
         // Wrapped in an async closure for ease of using await
+        // deno-lint-ignore no-extra-semi
         ;(async () => {
             // NOTE: Skipping some ceremony such as content negotiation, setting informative headers, etc. These may be nice
             // to have for completeness, but there's no clear benefit to adding them, so just keeping things simple. If a
@@ -453,7 +454,7 @@ function isHTTPSOptions(options: HTTPSOptions | HTTPOptions): options is HTTPSOp
     return "keyFile" in options || "certFile" in options
 }
 
-async function parseBody(req: ServerRequest, bufferedReq: Uint8Array): Promise<Record<string, any>> {
+function parseBody(req: ServerRequest, bufferedReq: Uint8Array): Promise<Record<string, any>> {
     const bodyAsString = decoder.decode(bufferedReq)
     const contentType = req.headers.get("content-type")
     if (contentType === "application/x-www-form-urlencoded") {
@@ -469,9 +470,9 @@ async function parseBody(req: ServerRequest, bufferedReq: Uint8Array): Promise<R
             result[key] = value
         }
 
-        return result
+        return Promise.resolve(result)
     }
-    return JSON.parse(bodyAsString)
+    return Promise.resolve(JSON.parse(bodyAsString))
 }
 
 function htmlForInstallPath(addToSlackUrl: string) {

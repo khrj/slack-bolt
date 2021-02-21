@@ -186,7 +186,7 @@ export function matchConstraints(
 
         // Check callback_id
         if ("callback_id" in constraints && constraints.callback_id !== undefined) {
-            let callbackId: string = ""
+            let callbackId = ""
 
             if (isViewBody(body)) {
                 callbackId = body["view"]["callback_id"]

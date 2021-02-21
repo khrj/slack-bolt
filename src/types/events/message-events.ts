@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase no-explicit-any
 import { Block, KnownBlock, MessageAttachment } from "../../../deps.ts"
 
 export type MessageEvent =

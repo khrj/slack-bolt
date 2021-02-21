@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase
 /**
  * A Slack global shortcut wrapped in the standard metadata.
  *
