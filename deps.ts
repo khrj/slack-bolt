@@ -1,5 +1,3 @@
-export { assertEquals } from "https://deno.land/std@0.87.0/testing/asserts.ts"
-
 // Classes
 export { Server, ServerRequest } from "https://deno.land/std@0.87.0/http/server.ts"
 export { ConsoleLogger } from "https://deno.land/x/slack_logger@3.0.0/mod.ts"
