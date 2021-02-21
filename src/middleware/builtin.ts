@@ -324,7 +324,7 @@ export function ignoreSelf(): Middleware<AnyMiddlewareArgs> {
                 // TODO: revisit this once we have all the message subtypes defined to see if we can do this better with
                 // type narrowing
                 // Look for an event that is identified as a bot message from the same bot ID as this app, and return to skip
-                if (message.subtype === "bot_message" && message.bot_id === botId) {
+                if ("bot_id" in message && message.bot_id === botId) {
                     return
                 }
 
