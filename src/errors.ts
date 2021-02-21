@@ -1,4 +1,4 @@
-import type { ServerRequest } from "https://deno.land/std@0.87.0/http/server.ts"
+import type { ServerRequest } from "../deps.ts"
 
 export interface CodedError extends Error {
     code: string // This can be a value from ErrorCode, or WebClient's ErrorCode, or a NodeJS error code

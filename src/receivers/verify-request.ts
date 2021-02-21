@@ -9,11 +9,11 @@
  * can be reduced by implementing the equivalent functionality in terms of the functions in this file.
  */
 
-import type { ServerRequest } from "https://deno.land/std@0.87.0/http/server.ts"
-import type { Logger } from "https://deno.land/x/slack_logger@3.0.0/mod.ts"
+import type { ServerRequest } from "../../deps.ts"
+import type { Logger } from "../../deps.ts"
 
-import { decoder } from "https://deno.land/std@0.87.0/encoding/utf8.ts"
-import { hmac as createHmac } from "https://deno.land/x/god_crypto/hmac.ts"
+import { decoder } from "../../deps.ts"
+import { createHmac } from "../../deps.ts"
 
 export interface VerifyOptions {
     signingSecret: string

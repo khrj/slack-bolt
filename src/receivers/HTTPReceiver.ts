@@ -1,19 +1,7 @@
-import { resolve } from "https://deno.land/std@0.86.0/path/win32.ts"
-import { decoder } from "https://deno.land/std@0.87.0/encoding/utf8.ts"
-import {
-    HTTPOptions,
-    HTTPSOptions,
-    serve,
-    Server,
-    ServerRequest,
-    serveTLS,
-} from "https://deno.land/std@0.87.0/http/server.ts"
-import { ConsoleLogger, Logger, LogLevel } from "https://deno.land/x/slack_logger@3.0.0/mod.ts"
-import {
-    InstallProvider,
-    InstallProviderOptions,
-    InstallURLOptions,
-} from "https://deno.land/x/slack_oauth@3.0.0/mod.ts"
+import { decoder } from "../../deps.ts"
+import { HTTPOptions, HTTPSOptions, serve, Server, ServerRequest, serveTLS } from "../../deps.ts"
+import { ConsoleLogger, Logger, LogLevel } from "../../deps.ts"
+import { InstallProvider, InstallProviderOptions, InstallURLOptions } from "../../deps.ts"
 
 import App from "../App.ts"
 import {

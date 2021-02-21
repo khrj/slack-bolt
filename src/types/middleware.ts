@@ -1,5 +1,5 @@
-import { Logger } from "https://deno.land/x/slack_logger@3.0.0/mod.ts"
-import { WebClient } from "https://deno.land/x/slack_web_api@1.0.1/mod.ts"
+import { Logger } from "../../deps.ts"
+import { WebClient } from "../../deps.ts"
 import { SlackActionMiddlewareArgs } from "./actions/index.ts"
 import { SlackCommandMiddlewareArgs } from "./command/index.ts"
 import { SlackEventMiddlewareArgs } from "./events/index.ts"

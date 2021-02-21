@@ -1,4 +1,4 @@
-import { ChatPostMessageArguments, WebAPICallResult } from "https://deno.land/x/slack_web_api@1.0.1/mod.ts"
+import { ChatPostMessageArguments, WebAPICallResult } from "../../deps.ts"
 import { KnownKeys } from "./helpers.ts"
 
 // The say() utility function binds the message to the same channel as the incoming message that triggered the

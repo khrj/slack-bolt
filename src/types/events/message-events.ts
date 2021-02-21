@@ -1,4 +1,4 @@
-import { Block, KnownBlock, MessageAttachment } from "https://deno.land/x/slack_types@3.0.0/mod.ts"
+import { Block, KnownBlock, MessageAttachment } from "../../../deps.ts"
 
 export type MessageEvent =
     | GenericMessageEvent

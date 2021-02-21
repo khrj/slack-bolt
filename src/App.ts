@@ -1,17 +1,8 @@
-import { ServerRequest } from "https://deno.land/std@0.87.0/http/server.ts"
-import {
-    ParamsDictionary,
-    Request as OpineRequest,
-    Response as OpineResponse,
-} from "https://deno.land/x/opine@1.1.0/mod.ts"
-import { ConsoleLogger, Logger, LogLevel } from "https://deno.land/x/slack_logger@3.0.0/mod.ts"
-import {
-    addAppMetadata,
-    ChatPostMessageArguments,
-    WebClient,
-    WebClientOptions,
-} from "https://deno.land/x/slack_web_api@1.0.1/mod.ts"
 import { name, version } from "../config.ts"
+import { ServerRequest } from "../deps.ts"
+import { OpineRequest, OpineResponse, ParamsDictionary } from "../deps.ts"
+import { ConsoleLogger, Logger, LogLevel } from "../deps.ts"
+import { addAppMetadata, ChatPostMessageArguments, WebClient, WebClientOptions } from "../deps.ts"
 import { conversationContext, ConversationStore, MemoryStore } from "./conversation-store.ts"
 import { AppInitializationError, asCodedError, CodedError, MultipleListenerError } from "./errors.ts"
 import { assertNever, getTypeAndConversation, IncomingEventType } from "./helpers.ts"
@@ -84,8 +75,8 @@ export interface AppOptions {
     developerMode?: boolean
 }
 
-export { LogLevel } from "https://deno.land/x/slack_logger@3.0.0/mod.ts"
-export type { Logger } from "https://deno.land/x/slack_logger@3.0.0/mod.ts"
+export { LogLevel } from "../deps.ts"
+export type { Logger } from "../deps.ts"
 
 /** Authorization function - seeds the middleware processing and listeners with an authorization context */
 export interface Authorize<IsEnterpriseInstall extends boolean = false> {

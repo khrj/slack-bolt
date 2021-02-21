@@ -1,4 +1,4 @@
-import { Confirmation, Option, PlainTextElement } from "https://deno.land/x/slack_types@3.0.0/mod.ts"
+import { Confirmation, Option, PlainTextElement } from "../../../deps.ts"
 import { StringIndexed } from "../helpers.ts"
 import { ViewOutput } from "../view/index.ts"
 

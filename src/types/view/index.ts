@@ -1,4 +1,4 @@
-import { View } from "https://deno.land/x/slack_types@3.0.0/mod.ts"
+import { View } from "../../../deps.ts"
 import { StringIndexed } from "../helpers.ts"
 import { AckFn } from "../utilities.ts"
 

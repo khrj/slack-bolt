@@ -1,24 +1,20 @@
-import { ConsoleLogger, Logger, LogLevel } from "https://deno.land/x/slack_logger@3.0.0/mod.ts"
-import {
-    InstallProvider,
-    InstallProviderOptions,
-    InstallURLOptions,
-} from "https://deno.land/x/slack_oauth@3.0.0/mod.ts"
+import { ConsoleLogger, Logger, LogLevel } from "../../deps.ts"
+import { InstallProvider, InstallProviderOptions, InstallURLOptions } from "../../deps.ts"
 
-import { hmac as createHmac } from "https://deno.land/x/god_crypto/hmac.ts"
+import { createHmac } from "../../deps.ts"
 import {
+    createOpine,
+    createRouter,
     Opine,
-    opine as createOpine,
+    OpineRequest,
+    OpineResponse,
     ParamsDictionary,
-    Request as OpineRequest,
     RequestHandler,
-    Response as OpineResponse,
-    Router as createRouter,
-} from "https://deno.land/x/opine@1.1.0/mod.ts"
+} from "../../deps.ts"
 
-import type { HTTPOptions, HTTPSOptions, Server } from "https://deno.land/std@0.87.0/http/server.ts"
+import type { HTTPOptions, HTTPSOptions, Server } from "../../deps.ts"
 
-import { decoder } from "https://deno.land/std@0.83.0/encoding/utf8.ts"
+import { decoder } from "../../deps.ts"
 import App from "../App.ts"
 import { ReceiverAuthenticityError, ReceiverInconsistentStateError, ReceiverMultipleAckError } from "../errors.ts"
 import { AnyMiddlewareArgs, Receiver, ReceiverEvent } from "../types/index.ts"

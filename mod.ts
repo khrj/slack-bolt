@@ -14,7 +14,7 @@ export type {
     InstallProviderOptions,
     InstallURLOptions,
     StateStore,
-} from "https://deno.land/x/slack_oauth@3.0.0/mod.ts"
+} from "./deps.ts"
 
 export type {
     WorkflowStepConfig,

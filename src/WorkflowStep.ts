@@ -1,4 +1,4 @@
-import { Block, KnownBlock, WebAPICallResult } from "https://deno.land/x/slack_web_api@1.0.1/mod.ts"
+import { Block, KnownBlock, WebAPICallResult } from "../deps.ts"
 import { WorkflowStepInitializationError } from "./errors.ts"
 import { processMiddleware } from "./middleware/process.ts"
 import {

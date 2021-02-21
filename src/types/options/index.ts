@@ -1,4 +1,4 @@
-import { Option } from "https://deno.land/x/slack_types@3.0.0/mod.ts"
+import { Option } from "../../../deps.ts"
 import { StringIndexed, XOR } from "../helpers.ts"
 import { AckFn } from "../utilities.ts"
 

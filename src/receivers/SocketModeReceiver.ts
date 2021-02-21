@@ -1,12 +1,8 @@
-import { serve, ServerRequest } from "https://deno.land/std@0.87.0/http/server.ts"
-import { ConsoleLogger, Logger, LogLevel } from "https://deno.land/x/slack_logger@3.0.0/mod.ts"
-import {
-    InstallProvider,
-    InstallProviderOptions,
-    InstallURLOptions,
-} from "https://deno.land/x/slack_oauth@3.0.0/mod.ts"
-import { SocketModeClient } from "https://deno.land/x/slack_socket_mode@1.0.0/mod.ts"
-import { WebAPICallResult } from "https://deno.land/x/slack_web_api@1.0.1/mod.ts"
+import { ConsoleLogger, Logger, LogLevel } from "../../deps.ts"
+import { SocketModeClient } from "../../deps.ts"
+import { WebAPICallResult } from "../../deps.ts"
+import { serve, ServerRequest } from "../../deps.ts"
+import { InstallProvider, InstallProviderOptions, InstallURLOptions } from "../../deps.ts"
 import App from "../App.ts"
 import { Receiver, ReceiverEvent } from "../types/index.ts"
 
