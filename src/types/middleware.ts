@@ -1,5 +1,4 @@
-import { Logger } from "../../deps.ts"
-import { WebClient } from "../../deps.ts"
+import { Logger, WebClient } from "../../deps.ts"
 import { SlackActionMiddlewareArgs } from "./actions/index.ts"
 import { SlackCommandMiddlewareArgs } from "./command/index.ts"
 import { SlackEventMiddlewareArgs } from "./events/index.ts"

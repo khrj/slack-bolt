@@ -1,8 +1,17 @@
 import { name, version } from "../config.ts"
-import { ServerRequest } from "../deps.ts"
-import { OpineRequest, OpineResponse, ParamsDictionary } from "../deps.ts"
-import { ConsoleLogger, Logger, LogLevel } from "../deps.ts"
-import { addAppMetadata, ChatPostMessageArguments, WebClient, WebClientOptions } from "../deps.ts"
+import {
+    addAppMetadata,
+    ChatPostMessageArguments,
+    ConsoleLogger,
+    Logger,
+    LogLevel,
+    OpineRequest,
+    OpineResponse,
+    ParamsDictionary,
+    ServerRequest,
+    WebClient,
+    WebClientOptions,
+} from "../deps.ts"
 import { conversationContext, ConversationStore, MemoryStore } from "./conversation-store.ts"
 import { AppInitializationError, asCodedError, CodedError, MultipleListenerError } from "./errors.ts"
 import { assertNever, getTypeAndConversation, IncomingEventType } from "./helpers.ts"

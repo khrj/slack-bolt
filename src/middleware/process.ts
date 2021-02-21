@@ -1,5 +1,4 @@
-import { Logger } from "../../deps.ts"
-import { WebClient } from "../../deps.ts"
+import { Logger, WebClient } from "../../deps.ts"
 import { AnyMiddlewareArgs, Context, Middleware } from "../types/index.ts"
 
 export async function processMiddleware(

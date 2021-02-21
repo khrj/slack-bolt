@@ -9,11 +9,8 @@
  * can be reduced by implementing the equivalent functionality in terms of the functions in this file.
  */
 
-import type { ServerRequest } from "../../deps.ts"
-import type { Logger } from "../../deps.ts"
-
-import { decoder } from "../../deps.ts"
-import { createHmac } from "../../deps.ts"
+import type { Logger, ServerRequest } from "../../deps.ts"
+import { createHmac, decoder } from "../../deps.ts"
 
 export interface VerifyOptions {
     signingSecret: string

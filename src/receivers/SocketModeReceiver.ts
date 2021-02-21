@@ -1,8 +1,15 @@
-import { ConsoleLogger, Logger, LogLevel } from "../../deps.ts"
-import { SocketModeClient } from "../../deps.ts"
-import { WebAPICallResult } from "../../deps.ts"
-import { serve, ServerRequest } from "../../deps.ts"
-import { InstallProvider, InstallProviderOptions, InstallURLOptions } from "../../deps.ts"
+import {
+    ConsoleLogger,
+    InstallProvider,
+    InstallProviderOptions,
+    InstallURLOptions,
+    Logger,
+    LogLevel,
+    serve,
+    ServerRequest,
+    SocketModeClient,
+    WebAPICallResult,
+} from "../../deps.ts"
 import App from "../App.ts"
 import { Receiver, ReceiverEvent } from "../types/index.ts"
 

@@ -1,10 +1,14 @@
-import { ConsoleLogger, Logger, LogLevel } from "../../deps.ts"
-import { InstallProvider, InstallProviderOptions, InstallURLOptions } from "../../deps.ts"
-
-import { createHmac } from "../../deps.ts"
 import {
+    ConsoleLogger,
+    createHmac,
     createOpine,
     createRouter,
+    decoder,
+    InstallProvider,
+    InstallProviderOptions,
+    InstallURLOptions,
+    Logger,
+    LogLevel,
     Opine,
     OpineRequest,
     OpineResponse,
@@ -14,7 +18,6 @@ import {
 
 import type { HTTPOptions, HTTPSOptions, Server } from "../../deps.ts"
 
-import { decoder } from "../../deps.ts"
 import App from "../App.ts"
 import { ReceiverAuthenticityError, ReceiverInconsistentStateError, ReceiverMultipleAckError } from "../errors.ts"
 import { AnyMiddlewareArgs, Receiver, ReceiverEvent } from "../types/index.ts"
