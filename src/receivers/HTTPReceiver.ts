@@ -261,7 +261,7 @@ export default class HTTPReceiver implements Receiver {
             // req object, so that its as reusable as possible. Later, we should consider adding an option for assigning the
             // parsed body to `req.body`, as this convention has been established by the popular `body-parser` package.
             try {
-                body = parseBody(req)
+                body = await parseBody(req)
             } catch (err) {
                 this.logger.warn(`Malformed request body: ${err.message}`)
                 return await req.respond({
