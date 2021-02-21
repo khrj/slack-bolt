@@ -23,7 +23,7 @@
 ## Usage
 
 ```ts
-import {} from 'https://deno.land/x/slack_bolt@0.0.3/mod.ts'
+import {} from "https://deno.land/x/slack_bolt@0.0.3/mod.ts"
 ```
 
 ## Supporters
