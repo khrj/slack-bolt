@@ -15,6 +15,9 @@
     <p>
         <b><a href="https://deno.land/x/slack_bolt">View on deno.land</a></b>
     </p>
+    <p>
+        <a href="https://www.producthunt.com/posts/slack-bolt-for-deno?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-slack-bolt-for-deno" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=285529&theme=dark" alt="Slack Bolt for Deno - TypeScript framework to build Slack apps with Deno rapidly | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+    </p>
     <br>
     <br>
     <br>
