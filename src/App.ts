@@ -439,7 +439,7 @@ export default class App {
    * @param args receiver-specific start arguments
    */
     public start(
-        ...args: Parameters<HTTPReceiver["start"]>
+        ...args: Parameters<HTTPReceiver["start"] | SocketModeReceiver["start"]>
     ): ReturnType<HTTPReceiver["start"]> {
         return this.receiver.start(...args) as ReturnType<HTTPReceiver["start"]>
     }
