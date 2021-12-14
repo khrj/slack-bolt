@@ -82,7 +82,7 @@ export async function verify(
     )
 
     // TODO Time safe compare (?)
-    if (signatureHash === hmac.hex()) {
+    if (signatureHash !== hmac.hex()) {
         throw new Error(`${verifyErrorPrefix}: signature mismatch`)
     }
 
